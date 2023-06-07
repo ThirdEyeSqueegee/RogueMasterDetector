@@ -26,7 +26,11 @@ namespace RogueMasterDetector {
             }
         }
 
-        if (rogue_masters_found) RE::DebugNotification("WARNING: Rogue masters detected. Check RogueMasterDetector.log.");
-        else logger::info("No rogue masters detected.");
+        if (rogue_masters_found) {
+            RE::DebugNotification("WARNING: Rogue masters detected. Check RogueMasterDetector.log.");
+            logger::info("Found rogue masters:");
+            for (const auto& master : rogue_masters)
+                logger::info("    {}", master);
+        } else logger::info("No rogue masters detected.");
     }
 }
