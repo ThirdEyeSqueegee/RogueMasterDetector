@@ -27,8 +27,9 @@ namespace RogueMasterDetector {
         }
 
         if (rogue_masters_found) {
-            const auto ret = std::ranges::unique(rogue_masters);
-            rogue_masters.erase(ret.begin(), ret.end());
+            std::ranges::sort(rogue_masters);
+            const auto [fst, lst] = std::ranges::unique(rogue_masters);
+            rogue_masters.erase(fst, lst);
             RE::DebugNotification("WARNING: Rogue masters detected. Check RogueMasterDetector.log.");
             logger::info("Found rogue masters:");
             for (const auto& master : rogue_masters)
